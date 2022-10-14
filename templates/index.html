@@ -1,0 +1,20 @@
+<!-- Projet PEIP - Python -->
+<!-- Programme de collecte et de présentation d'informations système -->
+<!-- Partie Frontend : Flask + HTML / CSS-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+{{turbo()}}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="https://cdn.skypack.dev/pin/@hotwired/turbo@v7.1.0-RBjb2wnkmosSQVoP27jT/min/@hotwired/turbo.js"></script>
+<title>Informations de {{infos['hostname']}}</title>
+</head>
+<body>
+
+<div id="header"><p id="titre">Informations de {{infos['hostname']}} <a id="json" href="{{url_for('static', filename='infos-'+infos['hostname']+'.json')}}">JSON</a></p></div>
+{% include "infos.html" %}
+<div id="footer">Interface Web d'affichage d'informations système - Kamel SEMMAR - RT2B2 - PEIP</div>
+</body>
+</html>

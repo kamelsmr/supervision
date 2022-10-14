@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+body 
+{
+	margin: 0px;
+	padding-top: 5%;
+	background-color: #d9e4f5;
+	background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+	}
+	
+#header 
+{
+	z-index:1;
+	height: 55px;
+	position: fixed;
+	top:0;
+	width: 100%;
+	background-color: #000000;
+	text-align: center;
+}
+#titre
+{
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #dddddd;
+	margin-top: auto;
+	font-size: calc(0.75vw + 2em);
+}
+a 
+{
+	color: #dddddd;
+}
+a:hover 
+{
+	color: #555555;
+}
+
+#json
+{
+	font-size:calc(0.1vw + 0.4em);
+}
+#infos
+{
+	z-index: 0;
+	font-size: calc(0.5vw + 0.5em);
+	font-family: 'Source Sans Pro', sans-serif;
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+ @media screen and (max-width: 720px) {
+	#infos 
+	{
+	margin-top: 8%;
+	z-index: 0;
+	font-size: calc(0.5vw + 0.5em);
+	font-family: 'Source Sans Pro', sans-serif;
+	display: block;
+	}
+ }
+#ig
+{
+	z-index: 0;
+	border: 1px solid black;
+	margin: auto;
+	padding: 3%;
+	
+}
+#jauge
+{
+	z-index: 0;
+	border: 1px solid black;
+	margin: auto;
+	padding: 3%;
+}
+#part
+{
+	z-index: 0;
+	border: 1px solid black;
+	margin: auto;
+	padding: 3%;
+}
+
+#svc
+{
+	font-size: calc(0.5vw + 0.75em);
+	z-index: 0;
+	border: 1px solid black;
+	margin: auto;
+	padding: 10%;
+}
+pre
+{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+#footer 
+{
+	z-index:1;
+	font-family: 'Source Sans Pro', sans-serif;
+	position: fixed;
+	bottom:0;
+	height: 5%;
+	font-size:calc(1vw + 0.75em);
+	color: #dddddd;
+	width: 100%;
+	background-color: black;
+	text-align: center;
+}

@@ -1,0 +1,62 @@
+<section id="infos">
+<fieldset id="ig">
+<legend>Informations générales</legend>
+   <pre>Système d'exploitation : {{infos['ostype']}} {{infos['osversion']}} ({{infos['version']}})</pre>
+   <pre>Uptime : {{infos['uptime']}} secondes  --  {{infos['ddhhmmss']}}</pre>
+   <pre>Kernel : {{infos['kernel']}}</pre>
+   {%if infos['distribution'] is not none%}<pre>Distribution Linux : {{infos['distribution']}}</pre>{%endif%}
+   <pre>Processeur : {{infos['cpuinfo']}}, {{infos['cputype']}} bits, {{infos['nbcoeurs']}} coeurs</pre>
+   <pre>Utilisation processeur : {{infos['usagecpu']}}% à la fréquence {{infos['cpufreq']}} GHz</pre>
+   <pre>Mémoire vive : {{infos['ram']}} Go au total, {{infos['ramocc']}} Go occupés, {{infos['ramlibre']}} Go libres ({{infos['rampct']}}%)</pre>
+   {%if infos['buffer'] is not none and infos['cache'] is not none%}<pre>Mémoire en buffer : {{infos['buffer']}} Mo, en cache : {{infos['cache']}} Mo</pre>{%endif%}
+   </fieldset>
+   <fieldset id="jauge"><legend>Usage CPU / RAM</legend>
+
+   <div id="chart_div" style="width: 300px;height: 150px;">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+   setInterval(function(){
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+	  
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Memory', {{infos['rampct']}}],
+          ['CPU', {{infos['usagecpu']}}],
+        ]);
+
+        var options = {
+          width: 300, height: 200,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+		}
+	  },1);
+
+    </script>
+</div></fieldset>
+   <fieldset id="part"><legend>Disques et partitions</legend><pre>{{infos['nbpart']}} partitions : 
+   {% for i in range(0, infos['nbpart']) %} 
+   {{infos['device'+i|string]}}
+   {%if infos['capacite'+i|string] is not none and infos['pmontage'+i|string] is not none and infos['libre'+i|string] is not none and infos['pct'+i|string] is not none%}
+   [{%if infos['ostype'] == "Linux"%}Monté sur {{infos['pmontage'+i|string]}}, {%endif%}Système : {{infos['fs'+i|string]}}, Capacité : {{infos['capacite'+i|string]}}o, {{infos['libre'+i|string]}}o libres ({{infos['pct'+i|string]}}%)]
+   {%else%}
+   [Le disque n'est pas monté ou ne peut pas être lu]
+   {%endif%}
+   {%endfor%}
+   </pre></fieldset>
+   <fieldset id="svc"><legend title="Ce sont les services contenus dans services.ini">Services démarrés</legend>
+   <pre>{% if listsvc is not none and infos['nbsvc'] is not none %}
+   {% for i in range(0, infos['nbsvc']) %} 
+   {{infos['nomsvc'+i|string]}} : {%if infos['status'+i|string] == "running"%}Actif{%elif infos['status'+i|string] == 0%}Actif{%else%}Inactif{%endif%}
+   {%endfor%}{%endif%}</pre></fieldset>
+   </section>
